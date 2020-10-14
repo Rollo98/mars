@@ -10,6 +10,8 @@ const GCP_VM_DATA = db.define(
     instance_id: {
       type: DataTypes.STRING,
       allowNull: false,
+      // This has to be private key or else any ORM is going to create one for you
+      primaryKey: true,
     },
     creation_tls: {
       type: DataTypes.DATE,

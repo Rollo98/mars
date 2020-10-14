@@ -6,6 +6,9 @@ const sequelize = new Sequelize('sqlite::memory:')
 
 const { DataTypes } = Sequelize
 
+const { modelChecker } = require('./modelChecker')
+const { getStructureOfModel } = require('./getStructureOfModel')
+
 const LogWritter = async (config, filetype, Data, func) => {
   console.log(config.output.mode)
 
@@ -29,7 +32,21 @@ const LogWritter = async (config, filetype, Data, func) => {
       JSON.parse(Data).map((eachAsset) => {
         const resourceType =
           eachAsset.asset.securityCenterProperties.resourceType
-        console.log(resourceType)
+        const model = modelChecker(resourceType)
+        if (model) {
+          model.sync()
+          const column = getStructureOfModel(model, eachAsset)
+          if (column) {
+            column
+              .save()
+              .then((e) => {
+                return
+              })
+              .catch((e) => {
+                return
+              })
+          }
+        }
       })
       break
     default:
