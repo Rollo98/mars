@@ -30,7 +30,9 @@
         "@google-cloud/security-center": "^5.0.1",
         "axios": "^0.19.2",
         "commander": "^5.1.0",
+        "mysql2": "^2.2.5",
         "sequelize": "^6.3.5",
+        "sqlite3": "^5.0.0",
         "xml2json": "^0.12.0"
     },
     "devDependencies": {
